@@ -671,9 +671,9 @@ __le
     code.code[#code.code+1]={"return",0}
     if debug.code then self:debugf("%s",code.code) end
     if debug.codel then 
-      hc3_emulator.colorDebug = false
+      if hc3_emulator then hc3_emulator.colorDebug = false end
       for i,inst in ipairs(code.code) do self:debugf("PC:%3d %s",i,inst) end
-      hc3_emulator.colorDebug = true
+      if hc3_emulator then hc3_emulator.colorDebug = true end
     end
 
     return function()
