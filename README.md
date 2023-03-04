@@ -89,3 +89,77 @@ function code(str)
   return comp.load(str,nil,nil,comp.stdFuns,debug)()
 end
 run()
+```
+
+A simple function with all tracing bells turned on
+```
+debug={struct=true,codel=true,trace=true}
+code([[function fact(x) if x == 0 then return 1 else return x*fact(x-1) end end; print(fact(3))]])
+```
+
+gives the following output
+```
+DEBUG: ["block",[["nop",["function","glob","fun",["glob","fact"],["x"],false,["block",[["if",["==",["var","x"],0],["block",[["return1",[1]]]],[],["block",[["return1",[["*",["var","x"],["call",["glob","fact"],[["-",["var","x"],1]]]]]]]]]]]]],["nop",["call",["glob","print"],[["call",["glob","fact"],[3]]]]]]]
+DEBUG: PC:  1 ["function",["x"],false,"glob","fun",["glob","fact"],[["var","x"],["push",0],["eq"],["ifnskip3",5],["push",1],["return",1],["pop"],["goto",10],["var","x"],["var","x"],["push",1],["sub"],["glob","fact"],["call",1,["glob","fact"]],["mul"],["return",1],["pop"],["return",0]]]
+DEBUG: PC:  2 ["pop"]
+DEBUG: PC:  3 ["push",3]
+DEBUG: PC:  4 ["glob","fact"]
+DEBUG: PC:  5 ["call",1,["glob","fact"]]
+DEBUG: PC:  6 ["glob","print"]
+DEBUG: PC:  7 ["call",1,["glob","print"]]
+DEBUG: PC:  8 ["pop"]
+DEBUG: PC:  9 ["return",0]
+TRACE: main    PC:001 ST:000 ["function",["x"],false,"glob","fun",["glob","fact"],[["var","x"],["push",0],["e null
+TRACE: main    PC:002 ST:001 ["pop"]                        <non-json>
+TRACE: main    PC:003 ST:000 ["push",3]                     null
+TRACE: main    PC:004 ST:001 ["glob","fact"]                3
+TRACE: main    PC:005 ST:002 ["call",1,["glob","fact"]]     <non-json>
+TRACE: main    PC:001 ST:000 ["var","x"]                    null
+TRACE: main    PC:002 ST:001 ["push",0]                     3
+TRACE: main    PC:003 ST:002 ["eq"]                         0
+TRACE: main    PC:004 ST:001 ["ifnskip3",5]                 false
+TRACE: main    PC:009 ST:000 ["var","x"]                    null
+TRACE: main    PC:010 ST:001 ["var","x"]                    3
+TRACE: main    PC:011 ST:002 ["push",1]                     3
+TRACE: main    PC:012 ST:003 ["sub"]                        1
+TRACE: main    PC:013 ST:002 ["glob","fact"]                2
+TRACE: main    PC:014 ST:003 ["call",1,["glob","fact"]]     <non-json>
+TRACE: main    PC:001 ST:000 ["var","x"]                    null
+TRACE: main    PC:002 ST:001 ["push",0]                     2
+TRACE: main    PC:003 ST:002 ["eq"]                         0
+TRACE: main    PC:004 ST:001 ["ifnskip3",5]                 false
+TRACE: main    PC:009 ST:000 ["var","x"]                    null
+TRACE: main    PC:010 ST:001 ["var","x"]                    2
+TRACE: main    PC:011 ST:002 ["push",1]                     2
+TRACE: main    PC:012 ST:003 ["sub"]                        1
+TRACE: main    PC:013 ST:002 ["glob","fact"]                1
+TRACE: main    PC:014 ST:003 ["call",1,["glob","fact"]]     <non-json>
+TRACE: main    PC:001 ST:000 ["var","x"]                    null
+TRACE: main    PC:002 ST:001 ["push",0]                     1
+TRACE: main    PC:003 ST:002 ["eq"]                         0
+TRACE: main    PC:004 ST:001 ["ifnskip3",5]                 false
+TRACE: main    PC:009 ST:000 ["var","x"]                    null
+TRACE: main    PC:010 ST:001 ["var","x"]                    1
+TRACE: main    PC:011 ST:002 ["push",1]                     1
+TRACE: main    PC:012 ST:003 ["sub"]                        1
+TRACE: main    PC:013 ST:002 ["glob","fact"]                0
+TRACE: main    PC:014 ST:003 ["call",1,["glob","fact"]]     <non-json>
+TRACE: main    PC:001 ST:000 ["var","x"]                    null
+TRACE: main    PC:002 ST:001 ["push",0]                     0
+TRACE: main    PC:003 ST:002 ["eq"]                         0
+TRACE: main    PC:004 ST:001 ["ifnskip3",5]                 true
+TRACE: main    PC:005 ST:000 ["push",1]                     null
+TRACE: main    PC:006 ST:001 ["return",1]                   1
+TRACE: main    PC:015 ST:002 ["mul"]                        1
+TRACE: main    PC:016 ST:001 ["return",1]                   1
+TRACE: main    PC:015 ST:002 ["mul"]                        1
+TRACE: main    PC:016 ST:001 ["return",1]                   2
+TRACE: main    PC:015 ST:002 ["mul"]                        2
+TRACE: main    PC:016 ST:001 ["return",1]                   6
+TRACE: main    PC:006 ST:001 ["glob","print"]               6
+TRACE: main    PC:007 ST:002 ["call",1,["glob","print"]]    <non-json>
+6
+TRACE: main    PC:008 ST:001 ["pop"]                        null
+TRACE: main    PC:009 ST:000 ["return",0]                   null
+Program completed in 2.05 seconds (pid: 38158).
+```
