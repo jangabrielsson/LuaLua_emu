@@ -161,5 +161,5 @@ TRACE: main    PC:007 ST:002 ["call",1,["glob","print"]]    <non-json>
 6
 TRACE: main    PC:008 ST:001 ["pop"]                        null
 TRACE: main    PC:009 ST:000 ["return",0]                   null
-Program completed in 2.05 seconds (pid: 38158).
+Program completed in 0.05 seconds (pid: 38158).
 ```
