@@ -81,8 +81,8 @@ function fopp() print("Crossing..") bar() end -- Non-LuaLua function to test wit
 local debug = {}
 
 function run()  debug={struct=false,codel=false,trace=false} main() end
-function debugC()  debug={struct=false,codel=false,trace=true} setTimeout(main,0) end
-function debugCStar()  debug={struct=false,codel=true,trace=true} setTimeout(main,0) end
+function debugC()  debug={struct=false,codel=false,trace=true} main() end
+function debugCStar()  debug={struct=false,codel=true,trace=true} main() end
 
 comp = Toolbox_Module.LuaCompiler.inited
 function code(str)
