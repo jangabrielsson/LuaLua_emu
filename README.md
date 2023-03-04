@@ -2,7 +2,7 @@
 
 Lua implemented in vanilla Lua without any libraries.
 
-Compiles Lua src to a bytecode run by an emulator implmented in Lua. Used in sandboxed environment where loadstring, metatables, and coroutines are not allowed.
+Compiles Lua src to a bytecode run by an emulator implemented in Lua. Used in sandboxed environment where loadstring, metatables, and coroutines are not allowed.
 ~10-30x slower than "native" Lua. Goto and label not implemented but metatables and coroutines works.
 
 Divided up in a parser and a compiler. The parser outputs a parse tree and the compiler creates a nested Lua function of the parse tree. The parser can be parsed by the parser and the parse-tree then compiled by the compiler thus reducing the code foot print.
